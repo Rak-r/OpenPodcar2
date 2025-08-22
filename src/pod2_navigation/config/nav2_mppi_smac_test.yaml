@@ -135,12 +135,18 @@ bt_navigator_navigate_to_pose_rclcpp_node:
 controller_server:
   ros__parameters:
     # controller server parameters (see Controller Server for more info)
-    use_sim_time: False
+    use_sim_time: True
     # odom_topic: /odometry/filtered
+
+    # --- This controls the frequency at which the controller runs. A higher frequency gives the controller more frequent updates, leading to faster response times, which is beneficial for tight turns and high-speed adjustments.20.0 Hz for better responsiveness
     controller_frequency: 20.0 #20.0 #5.0
+
+    # These parameters define the minimum thresholds for velocity along the x (linear), y (lateral), and theta (angular) axes. They prevent the robot from moving too slowly, which can cause it to stop prematurely or behave erratically. 
     min_x_velocity_threshold:  0.07 #0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001 #0.001
+
+    #These plugins are used to check whether the robot is making progress toward the goal and whether it has reached the goal.
     progress_checker_plugin: "progress_checker"
     goal_checker_plugins: ["general_goal_checker"]
     controller_plugins: ["FollowPath"]
@@ -162,30 +168,74 @@ controller_server:
       # vx_std increase was required to make the vehicle actually drive faster
       # as you decrease wz_std it makes the vehile drive better in a straight line but makes it not want to turn around when given goals behind its current pose
       # unknown why vy_max and vy_std are set for a diff drive vehicle
-      time_steps: 65
+
+      #1. Number of time steps to consider when predicting the trajectory. A larger number of time steps will give the controller more foresight, allowing it to handle tight curves better, but at the cost of higher computation. For tight turns: Increase to about 65–80. For smooth straights: You can decrease to around 20–40 for faster responses. ----- Range: 40–80 (for optimal tight turns and smooth runs)
+      time_steps: 70 #80 #65
+
+      #2. The time step between each prediction in the trajectory. A smaller dt allows for more precise control but increases computational demand. It’s important for sharp curves and maintaining smooth movement on straights.Range: Between 0.05 to 0.1. For tight turns: Use around 0.05 for finer control.For straights: Use up to 0.1 for faster optimization. Suggested Range: 0.05–0.1.
       model_dt: 0.05
-      batch_size: 1800
-      vx_std: 0.4                       # variability in forward trajectory velocities, allows the control to more trajectories velocitties in forward
+
+      #3. The number of trajectories sampled during the optimization process. Larger batch sizes provide more candidate trajectories, improving the robustness of the controller, but at a higher computational cost. Range: Between 1000 and 3000. For tight turns: Higher batch size like 1800–2500 will improve stability in complex maneuvers. For smooth straights: You can use a lower batch size like 1000–1500 for faster calculation. Suggested Range: 1500–2500.
+      batch_size: 1600 #2200 #1800
+
+      #4. The standard deviation of the velocity in the forward direction (x-axis). This controls the exploration of forward velocities. A higher value allows for more variability in velocity. Range: Between 0.2 and 0.6. For tight turns: Increase to around 0.4–0.6 to allow for more flexibility in speed during turns. For straights: Keep this lower, around 0.2–0.3, to avoid jerky motions while driving straight. Suggested Range: 0.3–0.6.
+      vx_std: 0.3 #0.6 #0.4                       # variability in forward trajectory velocities, allows the control to more trajectories velocitties in forward
+
+      # unknown why vy_max and vy_std are set for a diff drive vehicle
       # vy_std: 0.0
+
       wz_std: 0.2
-      vx_max: 0.2
+
+      #5. The maximum and minimum velocity limits in the forward direction. These limits control how fast the robot can move forward. Range: Typically between 0.2 and 1.0 for vx_max; vx_min should be negative and closer to -0.5 to allow reverse motion. For tight turns: You might want to limit to around 0.3–0.6 to avoid overshooting turns. For straights: Set vx_max to 0.8–1.0 for faster forward motion. Suggested Range: vx_max: 0.4–1.0, vx_min: -0.3–-0.5.
+      vx_max: 0.2 #0.2
       vx_min: -0.2
+#-----------------------------------------------------
+      # unknown why vy_max and vy_std are set for a diff drive vehicle
       # vy_max: 0.5
-      wz_max: 1.0 #1.9
-      ax_max: 2.5
+
+      #6. The maximum angular velocity (rate of turn). This is crucial for controlling the robot's ability to turn. Higher values allow for faster turns, which is needed for tight curves.Range: Between 1.0 and 2.5. For tight turns: Use 1.5–2.0 to allow the robot to turn faster. For straights: Keep this lower at 1.0 to avoid unnecessary rotations while driving straight. Suggested Range: 1.0–2.0.
+      wz_max: 1.2 #1.9
+
+      #7. ax_max and ax_min: The maximum and minimum linear acceleration. These parameters control the acceleration limits in the forward direction, affecting how quickly the robot speeds up or slows down. Range: Between 2.0 and 5.0 for ax_max, with ax_min being negative and around -2.0 to -3.0. For tight turns: Use a lower ax_max (around 2.5–3.0) to prevent overshooting turns and causing instability. For straights: Increase ax_max to around 4.0–5.0 for smoother, more controlled acceleration on straight paths.Suggested Range: ax_max: 2.0–5.0, ax_min: -2.0–-3.0.
+      ax_max: 3.0 #5.0 #2.5
       ax_min: -2.5
+
+
       iteration_count: 1
-      prune_distance: 2.0
+
+      #8. The distance threshold used to prune trajectories that are too far from the optimal path. This is important for ensuring that the controller focuses on feasible and optimal paths while ignoring extreme trajectories. Range: Typically between 1.0 and 2.5. For tight turns: Use 1.5–2.0 to ensure that trajectories for sharp turns are considered. For straights: A value closer to 1.0 can be used for straighter paths. Suggested Range: 1.0–2.0.
+      prune_distance: 1.5 #2.0
+
       transform_tolerance: 0.1
-      temperature: 0.3
-      gamma: 0.015 
-      visualize: false
+
+      #9. Controls the exploration vs. exploitation balance. A lower temperature focuses more on exploitation, whereas a higher value encourages exploration. A higher temperature helps in more exploration of diverse trajectories, which can help with tight curves. Range: Between 0.1 and 0.5. For tight turns: Use 0.3–0.5 for more exploration and better handling of turns. For straights: Keep it lower at 0.1–0.2 for smooth driving. Suggested Range: 0.2–0.5.
+      temperature: 0.4 #0.3
+
+      # This parameter is related to the cost function used in the MPPI controller to balance the trade-off between exploration and exploitation. A lower gamma encourages the controller to focus more on short-term rewards, which is useful for making fast, reactive decisions, especially in tight environments.Suggested Range: 0.01–0.05. Too high: The robot might focus too much on long-term goals, missing out on immediate obstacles or tight turns.Too low: It may become too reactive, leading to over-corrections and erratic behavior. Value of 0.015 is a reasonable starting point, balancing exploration and exploitation.
+      gamma: 0.010 #0.015 
+
+      #Controls whether to visualize the trajectories or not. This is useful for debugging or understanding how the robot is planning its movements. Keep it as false during regular operation, as visualization is computationally expensive and is not needed in production. For testing and development, set it to true to see the optimization steps.
+      visualize: true # prev false
+
+      #This defines how often the MPPI controller should reset its trajectory planning, in seconds. A short reset period means that the controller frequently updates its trajectory predictions, while a long reset period allows for longer, more stable paths. Suggested Range: 1.0 (default) to 2.0 (if needed for more stability).If set too low: The controller might be too reactive and constantly adjust its plans, leading to inefficiency. If set too high: The robot may not adapt well to sudden changes in the environment. Default of 1.0 is typically good for Humble.
       reset_period: 1.0 # (only in Humble)
+      
+      TrajectoryVisualizer:
+      trajectory_step: 5
+      time_step: 3
+
+      #Controls whether to regenerate random noise during trajectory optimization. Setting this to true ensures the controller explores different possible trajectories (helpful for better exploration of different paths). Suggested Value: false if you want to avoid recalculating noise each time, speeding up optimization. For smoother behavior: Keeping this false is usually fine unless you want more exploration (during development or testing).
       regenerate_noises: false
+      
       enforce_path_inversion: true                              # to have car like behaviour (three point goals)
+
+      #This ensures the robot maintains a car-like behavior (i.e., it should make smooth three-point turns when reversing). It’s important for robots that need to reverse and make U-turns, as it forces the robot to drive in a way that makes sense for its geometry (such as avoiding sharp turns in tight spaces).Suggested Value: true for more car-like behavior, especially useful in narrow spaces. If false: The robot may attempt unreasonable turns or reverse maneuvers. For tight turns, this setting helps the robot navigate reverse maneuvers smoothly, without instability.
       inversion_xy_tolerance: 0.5
       inversion_yaw_tolerance: 3.14
 
+
+
+      # --------------------------------------Motion Model and Ackermann Constraints----------------------------------------------------------
       motion_model: "Ackermann"
       AckermannConstraints:
         min_turning_r: 2.05
@@ -193,6 +243,9 @@ controller_server:
         trajectory_step: 5
         time_step: 3
       
+
+
+      #----------------------------------------Critics Configuration-------------------------------------------------------------------------------
       critics: ["ConstraintCritic", "ObstaclesCritic", "GoalCritic", "GoalAngleCritic", "PathAlignCritic", "PathFollowCritic", "PathAngleCritic"]
       ConstraintCritic:
         enabled: true

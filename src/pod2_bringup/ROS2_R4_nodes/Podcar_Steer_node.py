@@ -46,8 +46,12 @@ class Podcar(Node):
 
         self.Ackermann_pub = self.create_publisher(AckermannDrive, 'ackermann_cmd', 10)
         self.Steer_pub = self.create_publisher(String, 'R4_Command', 10)
-        self.twist_sub = self.create_subscription(Twist, '/cmd_vel_chicken_modulated', self.ackermann_callback, 10)
-        self.AINSTEER_sub = self.create_subscription(String, 'R4_AINSTEER', self.AINSTEER_callback, 10)
+        #self.twist_sub = self.create_subscription(Twist, '/cmd_vel_chicken_modulated', self.ackermann_callback, 10)
+        self.twist_sub = self.create_subscription(Twist, '/cmd_vel', self.ackermann_callback, 10)
+        
+        self.AINSTEER_sub = self.create_subscription(String, '/R4_AINSTEER', self.AINSTEER_callback, 10)
+        #self.AINSTEER_sub = self.create_subscription(String, '/R4_DHB1A', self.AINSTEER_callback, 10)
+
         self.linear_velocity = 0.0
         self.angular_velocity = 0.0
         self.desired_angle = 0.0
@@ -156,4 +160,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-

@@ -16,7 +16,8 @@ def generate_launch_description():
     map_file_path = os.path.join(
         get_package_share_directory('pod2_navigation'),
         'maps',
-        'empty_map.yaml'
+        'Sim_1.yaml'
+     #   'empty_map.yaml'
     )
 
     map_server_cmd = Node(

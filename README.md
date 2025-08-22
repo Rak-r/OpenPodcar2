@@ -58,6 +58,10 @@ OpenPodcar2 is as an Ackermann-steered vehicle.   The ROS2 community uses `Twist
 
 * `telelop_twist_joy` is a standard ROS2 node which converts `joy` messages to `Twist` type `cmd_vel` messages.  It includes an additional DMH configured on a button on the controller used via standard ROS2 YAML parameter file (RL for XBox). This DMH button must be held down on the controller in order for any other controls to have an effect.
 
+<p align="center">
+  <img src="./Images and videos/controller_with label.png" width="100%" />
+</p>
+
 ### Sensors
 
 OpenPodcar2 uses a single depthcam mounted on the front of the vehicle. This  outputs RGB and depth image data as standard ROS2 `Image` messages, along with pointcloud data over `PointCloud2` messages. `PointCloud2` messages are produced directly by the RGBD camera, as for lidar sensors.

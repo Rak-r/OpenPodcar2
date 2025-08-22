@@ -2,12 +2,12 @@
 teleop_twist_joy_node:
   ros__parameters:
     axis_linear:
-      x: 3
+      x: 4 #3 This parameter allows you to reassign a joystick button by changing the x value. The specific number for each button is determined by the "jstest-gtk" controller library.This line is for controlling the forward and backward movement.
     scale_linear:
       x: 1.0
 
     axis_angular:
-      yaw: 2
+      yaw: 0 # 2 This parameter allows you to reassign a joystick button by changing the x value. The specific number for each button is determined by the "jstest-gtk" controller library.This line is for controlling the Left and backward Right.
     scale_angular:
       yaw: 1.0
 
