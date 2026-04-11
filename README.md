@@ -346,7 +346,7 @@ Openpodcar_v2 has been tested in both gazebo simulation and real physical envrio
 Gazebo Fortress is used for the simulation of OpenPodCar_v2. The new gazebo features more functionalities with enhanced inetrface. As our robot behaves as car-like robot and features Ackermann-Steering kinematics. To maintain this behaviour in simulation the new gazebo now has an Ackermann system plugin which could be used according the robot configuartions. The plugin outputs standard `Twist` messages of field `linear.x` and `angular.z`. This also outputs the odometry information which might not be the correct odometry for the whole robot instead it is the odometry information for steering.
 
 
-The current repository features the ROS2 Humble with Gazebo garden. To use the ROS2 Humble packages with Gazebo Fortress, switch to the Fortress branch `https://github.com/Rak-r/OpenPodCar_V2/tree/Fortress`.
+
 
 
 #### If you want to launch the PodCar with Lidar enabled, run the below launch file:
