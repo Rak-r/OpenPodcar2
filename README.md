@@ -13,9 +13,19 @@ This is an Open Source Hardware and Software platform for Autonomous driivng res
 ## Table of Contents
 I. [General Info](#general-info)
 
-II. [Software descritpion](#software-description)
+II. [Hardware Description](#hardware-description)
+   - [Bill of Materials](#bill-of-materials)
+   - [Calibration](#calibration)
 
-III. [Bill of Materials](#bom)
+III. [Software Description](#software-description)
+   - [Kinematic Control](#kinematic-control)
+   - [Manual Teleoperation](#manaul-teleoperation)
+   - [Sensors](#sensors)
+   - [Localization and mapping](#localization-and-mapping)
+   - [Navigation](#navigation)
+   - [Pedestrian detection and tracking](#pedestrian-detection-and-tracking)
+   - [Physical R4 interface](#physical-r4-interface)
+   - [Simulation](#simulation)
 
 IV. [Software setup](#software-setup)
 
@@ -25,13 +35,11 @@ VI. [Installation for Openpodcar_v2](#installation-for-openpodcar_v2)
 
 VII. [Docker support for OpenPodcar_v2](#docker-support-for-OpenPodcar2)
 
-VIII. [Calibration](#calibration)
-
-IX. [Operator instructions](#operator-instructions)
+VIII. [Operator instructions](#operator-instructions)
 
 
 
-## To run or test the stack in simulation / real physical vehicle jump to section [Software setup](#software-setup) and then [Operator instructions](#operator-instructions)
+## For hardware setup, bill of materials, and calibration details jump to the [Hardware Description](#hardware-description). For running or testing the stack in simulation or real physical vehicles, refer to [Software setup](#software-setup) followed by [Operator instructions](#operator-instructions).
 
 
 ## I. <a name="general-info"></a> General Info
@@ -40,7 +48,17 @@ IX. [Operator instructions](#operator-instructions)
 This project is the complete new port from ROS1 of OpenPodCar1 to ROS2. The full software features the ROS2 Humble version and for simulation is done with new Gazebo.
 The OpenPodcar_2 package consists of sub-packages namely; `pod2_description`, `pod2_bringup`, `pod2_navigation`, `pod2_sensor_tools`, `pod2_rtabmap`, `pod2_msgs`.
 
-## II. <a name="software-description"></a> Software description
+## II. <a name="hardware-description"></a> Hardware Description
+
+Complete hardware instructions, including the Bill of Materials and Calibration, can be found in the [HARDWARE_INSTRUCTIONS.md](HARDWARE_INSTRUCTIONS.md) file.
+
+### <a name="bill-of-materials"></a> Bill of Materials
+See [HARDWARE_INSTRUCTIONS.md#i-bill-of-materials](HARDWARE_INSTRUCTIONS.md#i-bill-of-materials) for the full parts list.
+
+### <a name="calibration"></a> Calibration
+See [HARDWARE_INSTRUCTIONS.md#ii-calibration](HARDWARE_INSTRUCTIONS.md#ii-calibration) for depthcam and steering calibration procedures.
+
+## III. <a name="software-description"></a> Software description
 
 OpenPodcar2 uses a new software stack based on Robot Operating System version 2 (ROS2).  ROS2 is firstly a middleware system implementing publish-subscribe message passing between nodes across a TCP/IP network. Messages are published on named topics which can be subscribed to by any nodes interested in them. ROS2 is secondly a software ecosystem of state-of-the-art implementations of drivers for robots and simulators and of standard robotics algorithms. 
 
@@ -211,10 +229,6 @@ Pod2_navigation package consists of the `launch`, `rviz`, `maps`, `config` direc
 
 #### Note that slam_toolbox is best suited for LiDAR based robots and struggles with RGBD sensor. The OpenPodCar2 features a single RGBD sensor is tested with slam_toolbox with rigorous parameter tuning both in simulation and real physical vehicle. However, due to less angular FOV, the laser scan matching results in sudden jumps of robot. This has been discussed in https://github.com/SteveMacenski/slam_toolbox/issues/662.  To handle this RGBD based slam method RTABMAP is adopted. 
 
-## III. Hardware Instructions
-
-Hardware instructions including the Bill of Materials and Calibration have been moved to [HARDWARE_INSTRUCTIONS.md](HARDWARE_INSTRUCTIONS.md).
-
 ## IV. <a name="software-setup"></a> Software setup
 
 
@@ -336,11 +350,7 @@ The docker version is supported for ROS2 humble and gazebo Fortress due to LTS v
 
 `ros2 launch pod2_description pod2_description.launch.py scan_node:=false rgbd_node:=true`
 
-## VIII. <a name="calibration"></a> Calibration
-
-Calibration instructions have been moved to [HARDWARE_INSTRUCTIONS.md](HARDWARE_INSTRUCTIONS.md).
-
-## IX. <a name="operator-instructions"></a> Operator
+## VIII. <a name="operator-instructions"></a> Operator instructions
 
 Openpodcar_v2 has been tested in both gazebo simulation and real physical envrionment (indoor/outdoor). Follow the below sections for running the vehicle in simulation and real physical world.
 
