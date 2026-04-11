@@ -59,3 +59,22 @@
 <p align="center">
   <img src="./Images and videos/Steering_readings.png" width="100%" />
 </p>
+
+
+## III. Physical R4 interface
+
+* The physical hardware interface is based around the R4 open-source hardware board  R4. 
+
+
+* To establish the communication between the physical hardware board with high level ROS2 stack in order to perform manual teleoperation, Autonomous driving operation via NAV2, UDP protocol is utilized. There are three sets of ROS2 hardware nodes namely; `/R4_Websockets-Clients` which is responsible to establish the connection to transfer the data packets from R4 hardware board to ROS2 over the topic named `/R4` which gets unpacked by the second node `/R4_Publisher` to publish the individual component sub-messages mainly, steer voltage reading, main OSMC motor driver readings over the topics `/R4_AINSTEER` and `/R4_OSMC1`. 
+
+
+* Following this, these topics are subscribed by ROS2 nodes to control the steering and speed of the vehicle via gamepad for manual teleoperation and via \lstinline{nav2} for autonomous driving tasks.
+
+* The output of either manual teleoperation or `nav2` is same and published over the standard ROS2 message type `Twist` over `/cmd_vel` topic and this information is then subscribed by the third node named as `/R4_Receiver` .
+
+
+<p align="center">
+  <img src="./Images and videos/R4onperspex.png" width="100%" />
+</p>
+
