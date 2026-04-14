@@ -5,7 +5,7 @@ ARG INCLUDE_YOLO=false
 FROM $FROM_IMAGE
 
 # Set the workspace path as an argument
-ARG OVERLAY_WS=/opt/ros/OpenPodCar_V2
+ARG OVERLAY_WS=/opt/ros/OpenPodcar2
 
 # Specify the Gazebo version to install (fortress, garden, harmonic)
 ARG GZ_VERSION=fortress
