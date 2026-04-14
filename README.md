@@ -1,4 +1,4 @@
-# OpenPodCar_V2
+# OpenPodcar2
 
 OpenPodCar is a donor scooter vehicle which is transformed into autonomous vehicle with the integration of Robot Operating
 System (ROS) with the added support of newly released ROS2. The vehicle used for the implementation of our research and experiments named as Pihsiang TE-889XLSN hard-canopy scooter (branded in UK as ShopriderTraverso) (found here: https://www.smartscooters.co.uk/Traveso-Mobility-Scooter).
@@ -32,9 +32,9 @@ IV. [Software setup](#software-setup)
 
 V. [Testing installation](#testing-installation)
 
-VI. [Installation for Openpodcar_v2](#installation-for-openpodcar_v2)
+VI. [Installation for Openpodcar2](#installation-for-openpodcar_v2)
 
-VII. [Docker support for OpenPodcar_v2](#docker-support-for-OpenPodcar2)
+VII. [Docker support for OpenPodcar2](#docker-support-for-OpenPodcar2)
 
 VIII. [Operator instructions](#operator-instructions)
 
@@ -269,7 +269,7 @@ Openpodcar_v2 stack uses RMW cycloneDDS, this might be missed by rosdep  command
 
 
 
-## VI. <a name="installation-for-openpodcar_v2"></a> Installation for OpenPodCar_V2
+## VI. <a name="installation-for-openpodcar_v2"></a> Installation for OpenPodcar2
 
 To use this package for testing and running simulations using gazebo and ROS2 follow the below instructions:
 
@@ -281,7 +281,7 @@ To use this package for testing and running simulations using gazebo and ROS2 fo
 * Select the directory where you want to clone the project (by default is /home).
 
 
-* Clone the repository using: `git clone --recurse-submodules -b Fortress https://github.com/Rak-r/OpenPodCar_V2.git`
+* Clone the repository using: `git clone --recurse-submodules -b Fortress https://github.com/Rak-r/OpenPodcar2.git`
 
 
 
@@ -301,14 +301,14 @@ To use this package for testing and running simulations using gazebo and ROS2 fo
 5. If everything works well, you will have three directories alomg with `src` named `install`, `build` ad `log`.
 
 
-6. Once the package is build successfully, open bashrc and add : `source /home/<usr_name>/OpenPodCar_V2/install/setup.bash`
+6. Once the package is build successfully, open bashrc and add : `source /home/<usr_name>/OpenPodcar2/install/setup.bash`
 
 
 * **For example** : `source /home/<usr_name>/ros2_ws/install/setup.bash`. Replace `<usr_name>` with your user name, get using `pwd` command.
 
 ## VII. <a name="docker-support-for-OpenPodcar2"></a> Docker support for OpenPodcar2
 
-The docker version is supported for ROS2 humble and gazebo Fortress due to LTS version of gazebo at the time project development. In future more version suppport will be added. Follow the below instructions for using docker version of OpenPodCar2 with simulation.
+The docker version is supported for ROS2 humble and gazebo Fortress due to LTS version of gazebo at the time project development. In future more version suppport will be added. Follow the below instructions for using docker version of OpenPodcar2 with simulation.
 
 
 1.  After cloning the repository from same above instructions, make sure docker is installed correctly.
