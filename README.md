@@ -403,13 +403,13 @@ After mapping, if want to start the NAV2 stack in pre-build map, rtabmap can be 
 
 ## Images and Videos
 
-### Simulation OpenPodCar_2 with Pedestrian detection and NAV2 operation
+### Simulation OpenPodcar2 with Pedestrian detection and NAV2 operation
 
 
 https://github.com/user-attachments/assets/e513bdaa-67ae-4721-bcec-ed717356f360
 
 
-### OpenPodCar_2 on outdoor operation
+### OpenPodcar2 on outdoor operation
 
 <p align="center">
   <img src="./Images and videos/Podcar2_outdoor.jpg" width="100%" />
