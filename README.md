@@ -229,7 +229,7 @@ Pod2_navigation package consists of the `launch`, `rviz`, `maps`, `config` direc
 4. Install rosdep for resolving package dependencies: `sudo apt-get install python3-rosdep`
 
 ### NOTE:
-Openpodcar_v2 stack uses RMW cycloneDDS, this might be missed by rosdep  command. It is recommended to verify or to install seperately using command.
+OpenPodcar2 stack uses RMW cycloneDDS, this might be missed by rosdep  command. It is recommended to verify or to install seperately using command.
 `sudo apt install ros-humble-rmw-cyclonedds-cpp`
 
 3. Gazebo Fortress binary install: https://gazebosim.org/docs/fortress/install
@@ -343,7 +343,7 @@ Openpodcar_v2 has been tested in both gazebo simulation and real physical envrio
 
 ## Simulation guide
 
-Gazebo Fortress is used for the simulation of OpenPodCar_v2. The new gazebo features more functionalities with enhanced inetrface. As our robot behaves as car-like robot and features Ackermann-Steering kinematics. To maintain this behaviour in simulation the new gazebo now has an Ackermann system plugin which could be used according the robot configuartions. The plugin outputs standard `Twist` messages of field `linear.x` and `angular.z`. This also outputs the odometry information which might not be the correct odometry for the whole robot instead it is the odometry information for steering.
+Gazebo Fortress is used for the simulation of OpenPodcar2. The new gazebo features more functionalities with enhanced inetrface. As our robot behaves as car-like robot and features Ackermann-Steering kinematics. To maintain this behaviour in simulation the new gazebo now has an Ackermann system plugin which could be used according the robot configuartions. The plugin outputs standard `Twist` messages of field `linear.x` and `angular.z`. This also outputs the odometry information which might not be the correct odometry for the whole robot instead it is the odometry information for steering.
 
 
 
@@ -382,7 +382,7 @@ After mapping, if want to start the NAV2 stack in pre-build map, rtabmap can be 
 
 ## Physical vehicle Tele-operation & Autonomous operation
 
-To launch the physical OpenPodCar2 with teleoperation mode, the higher-level incoming game-pad commands as Twist message `linear.x, angualr.z` are converted to R4 protocol message which controls the main driver motor for forward and backward movement and linear actuator for controlling the steering for the OpenPodCar2. 
+To launch the physical OpenPodcar2 with teleoperation mode, the higher-level incoming game-pad commands as Twist message `linear.x, angualr.z` are converted to R4 protocol message which controls the main driver motor for forward and backward movement and linear actuator for controlling the steering for the OpenPodcar2. 
 
 To start the physical vehicle for tele-operation, after building the OpenPodCar2 packaghe from following above instruction.
 
