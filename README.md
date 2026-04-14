@@ -1,6 +1,6 @@
 # OpenPodcar2
 
-OpenPodCar is a donor scooter vehicle which is transformed into autonomous vehicle with the integration of Robot Operating
+OpenPodcar2 is a donor scooter vehicle which is transformed into autonomous vehicle with the integration of Robot Operating
 System (ROS) with the added support of newly released ROS2. The vehicle used for the implementation of our research and experiments named as Pihsiang TE-889XLSN hard-canopy scooter (branded in UK as ShopriderTraverso) (found here: https://www.smartscooters.co.uk/Traveso-Mobility-Scooter).
 ![IMG_6667](https://github.com/Rak-r/OpenPodCar_V2/assets/85680564/d19d6d02-5144-453d-9e30-7fc675c42a9b)
 
