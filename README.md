@@ -27,15 +27,17 @@ III. [Software Description](SOFTWARE_INSTRUCTIONS.md)
    - [Pedestrian detection and tracking](SOFTWARE_INSTRUCTIONS.md#pedestrian-detection-and-tracking)
    - [Simulation](SOFTWARE_INSTRUCTIONS.md#simulation)
 
-IV. [Software setup](#software-setup)
+IV. [General testing](#general-testing)
 
-V. [Testing installation](#testing-installation)
+V. [Software setup](#software-setup)
 
-VI. [Installation for Openpodcar2](#installation-for-openpodcar_v2)
+VI. [Testing installation](#testing-installation)
 
-VII. [Docker support for OpenPodcar2](#docker-support-for-OpenPodcar2)
+VII. [Installation for Openpodcar2](#installation-for-openpodcar_v2)
 
-VIII. [Operator instructions](#operator-instructions)
+VIII. [Docker support for OpenPodcar2](#docker-support-for-OpenPodcar2)
+
+IX. [Operator instructions](#operator-instructions)
 
 
 
@@ -60,8 +62,15 @@ Complete hardware instructions, including the Physical R4 Interface, Sensors, Bi
 
 Complete software instructions can be found in the [SOFTWARE_INSTRUCTIONS.md](SOFTWARE_INSTRUCTIONS.md) file.
 
-## IV. <a name="software-setup"></a> Software setup
+## IV. <a name="general-testing"></a> General testing
 
+To measure quality of mapping in a large environment, several SLAM tests were performed which demonstrate good quality maps and navigation. The maps of tight indoor lab space, large indoor corridor space and outdoor SLAM test are built using RTAB-Map SLAM package using visual odometry input from RGBD odometry from RTAB-Map. Figure 3(left) shows a SLAM map built using OpenPodcar2, driving around the first floor of a university building including a lab and several tight corridors. The SLAM system has also been tested with outdoor mapping in Figure 3(right). Both maps are close matches to real life, and include successful loop closures. To check the accuracy of the detection and tracking system using the RGBD camera, the resulting measurements of 3D coordinates were verified manually by placing pedestrians at known distances and monitoring the `/yolo/detections` topic. Measurements were within 200mm deviation, when tested indoors and outdoors with both static and dynamic pedestrians. Figure 4 shows a pedestrian tracked from RGBD sensor along with track history in the map frame.
+
+Forward goals (inclusive of sharp turns) and near to straight reverse goals were achievable while performing obstacle avoidance using local costmap. In autonomous mode, OpenPodcar2 was tested with both with a pre-built map and SLAM mode. The long indoor area was explored while navigating autonomously as shown in Figure 5 and Figure 6, a 3D map of the same environment build using RTAB-Map.
+
+
+
+## V. <a name="software-setup"></a> Software setup
 
 1. Ubuntu 22.04
 
@@ -87,7 +96,7 @@ OpenPodcar2 stack uses RMW cycloneDDS, this might be missed by rosdep  command. 
 6. Docker installation: https://docs.docker.com/engine/install/ubuntu/ 
 
 
-## V. <a name="testing-installation"></a> Testing Installation
+## VI. <a name="testing-installation"></a> Testing Installation
 
 1. To test that ROS2 is installed properly.
 * Open bashrc and add the folowing and save it. `source /opt/ros/humble/setup.bash`.
@@ -113,7 +122,7 @@ OpenPodcar2 stack uses RMW cycloneDDS, this might be missed by rosdep  command. 
 
 
 
-## VI. <a name="installation-for-openpodcar_v2"></a> Installation for OpenPodcar2
+## VII. <a name="installation-for-openpodcar_v2"></a> Installation for OpenPodcar2
 
 To use this package for testing and running simulations using gazebo and ROS2 follow the below instructions:
 
@@ -150,7 +159,7 @@ To use this package for testing and running simulations using gazebo and ROS2 fo
 
 * **For example** : `source /home/<usr_name>/ros2_ws/install/setup.bash`. Replace `<usr_name>` with your user name, get using `pwd` command.
 
-## VII. <a name="docker-support-for-OpenPodcar2"></a> Docker support for OpenPodcar2
+## VIII. <a name="docker-support-for-OpenPodcar2"></a> Docker support for OpenPodcar2
 
 The docker version is supported for ROS2 humble and gazebo Fortress due to LTS version of gazebo at the time project development. In future more version suppport will be added. Follow the below instructions for using docker version of OpenPodcar2 with simulation.
 
@@ -181,7 +190,7 @@ The docker version is supported for ROS2 humble and gazebo Fortress due to LTS v
 
 `ros2 launch pod2_description pod2_description.launch.py scan_node:=false rgbd_node:=true`
 
-## VIII. <a name="operator-instructions"></a> Operator instructions
+## IX. <a name="operator-instructions"></a> Operator instructions
 
 Openpodcar_v2 has been tested in both gazebo simulation and real physical envrionment (indoor/outdoor). Follow the below sections for running the vehicle in simulation and real physical world.
 
