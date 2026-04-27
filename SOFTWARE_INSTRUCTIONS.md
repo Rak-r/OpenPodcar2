@@ -28,10 +28,6 @@ OpenPodcar2 is as an Ackermann-steered vehicle.   The ROS2 community uses `Twist
 * The Intel Realsense D435 mounted on the vehicle has range of 10m but offers good accuracy for 5m range. The system checked with both ranges and default is set to 5m.
 
 
-<p align="center">
-  <img src="./Images and videos/Large_indoor_map.png" width="100%" />
-  <br><br><i>Figure 7: SLAM map of a large indoor environment.</i>
-</p>
 
 
 ## Navigation
@@ -41,7 +37,7 @@ The ROS2 ecosystem includes a navigation stack,  Navigation2 (nav2), designed to
 
 <p align="center">
   <img src="./Images and videos/Podcar_Nav2_node_graph.png" width="100%" />
-  <br><br><i>Figure 8: OpenPodcar2 Nav2 node graph.</i>
+  <br><br><i>Figure 7: OpenPodcar2 Nav2 node graph.</i>
 </p>
 
 
@@ -57,7 +53,7 @@ The ROS2 ecosystem includes a navigation stack,  Navigation2 (nav2), designed to
 
 <p align="center">
   <img src="./Images and videos/Masked_pedestrian.png" width="100%" />
-  <br><br><i>Figure 9: Masked pedestrian tracking via YOLOv8.</i>
+  <br><br><i>Figure 8: Masked pedestrian tracking via YOLOv8.</i>
 </p>
 
 

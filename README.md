@@ -44,7 +44,7 @@ IX. [Operator instructions](#operator-instructions)
 
 
 
-## For hardware setup, bill of materials, and calibration details jump to the [Hardware Description](#hardware-description). For running or testing the stack in simulation or real physical vehicles, refer to [Software setup](#software-setup) followed by [Operator instructions](#operator-instructions).
+## For hardware setup, bill of materials, and calibration details jump to the [Hardware Description](HARDWARE_INSTRUCTIONS.md). For running or testing the stack in simulation or real physical vehicles, refer to [Software Description](SOFTWARE_INSTRUCTIONS.md), [Software setup](#software-setup) followed by [Operator instructions](#operator-instructions).
 
 
 ## I. <a name="general-info"></a> General Info
@@ -67,30 +67,30 @@ Complete software instructions can be found in the [SOFTWARE_INSTRUCTIONS.md](SO
 
 ## IV. <a name="general-testing"></a> General testing
 
-To measure quality of mapping in a large environment, several SLAM tests were performed which demonstrate good quality maps and navigation. The maps of tight indoor lab space, large indoor corridor space and outdoor SLAM test are built using RTAB-Map SLAM package using visual odometry input from RGBD odometry from RTAB-Map. Figure 10(a) shows a SLAM map built using OpenPodcar2, driving around the first floor of a university building including a lab and several tight corridors. The SLAM system has also been tested with outdoor mapping in Figure 10(b). Both maps are close matches to real life, and include successful loop closures. To check the accuracy of the detection and tracking system using the RGBD camera, the resulting measurements of 3D coordinates were verified manually by placing pedestrians at known distances and monitoring the `/yolo/detections` topic. Measurements were within 200mm deviation, when tested indoors and outdoors with both static and dynamic pedestrians. Figure 11 shows a pedestrian tracked from RGBD sensor along with track history in the map frame.
+To measure quality of mapping in a large environment, several SLAM tests were performed which demonstrate good quality maps and navigation. The maps of tight indoor lab space, large indoor corridor space and outdoor SLAM test are built using RTAB-Map SLAM package using visual odometry input from RGBD odometry from RTAB-Map. Figure 9(a) shows a SLAM map built using OpenPodcar2, driving around the first floor of a university building including a lab and several tight corridors. The SLAM system has also been tested with outdoor mapping in Figure 9(b). Both maps are close matches to real life, and include successful loop closures. To check the accuracy of the detection and tracking system using the RGBD camera, the resulting measurements of 3D coordinates were verified manually by placing pedestrians at known distances and monitoring the `/yolo/detections` topic. Measurements were within 200mm deviation, when tested indoors and outdoors with both static and dynamic pedestrians. Figure 10 shows a pedestrian tracked from RGBD sensor along with track history in the map frame.
 
 <p align="center">
   <img src="./Images and videos/INB_1st_FLOOR.png" width="45%" />
   <img src="./Images and videos/IND_Ground_floor_outdoor.png" width="45%" />
-  <br><br><i>Figure 10: (a) SLAM map of 1st floor university building (left) and (b) outdoor SLAM map (right).</i>
+  <br><br><i>Figure 9: (a) SLAM map of 1st floor university building (left) and (b) outdoor SLAM map (right).</i>
 </p>
 
 <p align="center">
   <img src="./Images and videos/Pedtracks.png" width="80%" />
-  <br><br><i>Figure 11: Pedestrian tracked from RGBD sensor along with track history in the map frame.</i>
+  <br><br><i>Figure 10: Pedestrian tracked from RGBD sensor along with track history in the map frame.</i>
 </p>
 
 
-Forward goals (inclusive of sharp turns) and near to straight reverse goals were achievable while performing obstacle avoidance using local costmap. In autonomous mode, OpenPodcar2 was tested with both with a pre-built map and SLAM mode. The long indoor area was explored while navigating autonomously as shown in Figure 12 and Figure 13, a 3D map of the same environment build using RTAB-Map.
+Forward goals (inclusive of sharp turns) and near to straight reverse goals were achievable while performing obstacle avoidance using local costmap. In autonomous mode, OpenPodcar2 was tested with both with a pre-built map and SLAM mode. The long indoor area was explored while navigating autonomously as shown in Figure 11 and Figure 12, a 3D map of the same environment build using RTAB-Map.
 
 <p align="center">
   <img src="./Images and videos/INB_Giant_Map.png" width="80%" />
-  <br><br><i>Figure 12: Long indoor area explored while navigating autonomously.</i>
+  <br><br><i>Figure 11: Long indoor area explored while navigating autonomously.</i>
 </p>
 
 <p align="center">
   <img src="./Images and videos/Large_indoor_map.png" width="80%" />
-  <br><br><i>Figure 13: 3D map of the same environment built using RTAB-Map.</i>
+  <br><br><i>Figure 12: 3D map of the same environment built using RTAB-Map.</i>
 </p>
 
 
