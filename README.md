@@ -13,20 +13,19 @@ This is an Open Source Hardware and Software platform for Autonomous driivng res
 ## Table of Contents
 I. [General Info](#general-info)
 
-II. [Hardware Description](#hardware-description)
-   - [Bill of Materials](#bill-of-materials)
-   - [Calibration](#calibration)
-   - [Physical R4 interface](HARDWARE_INSTRUCTIONS.md#iii-physical-r4-interface)
+II. [Hardware Description](HARDWARE_INSTRUCTIONS.md)
+   - [Physical R4 interface](HARDWARE_INSTRUCTIONS.md#i-physical-r4-interface)
+   - [Sensors](HARDWARE_INSTRUCTIONS.md#ii-sensors)
+   - [Bill of Materials](HARDWARE_INSTRUCTIONS.md#iii-bill-of-materials)
+   - [Calibration](HARDWARE_INSTRUCTIONS.md#iv-calibration)
 
-III. [Software Description](#software-description)
-   - [Kinematic Control](#kinematic-control)
-   - [Manual Teleoperation](#manaul-teleoperation)
-   - [Sensors](#sensors)
-   - [Localization and mapping](#localization-and-mapping)
-   - [Navigation](#navigation)
-   - [Pedestrian detection and tracking](#pedestrian-detection-and-tracking)
-
-   - [Simulation](#simulation)
+III. [Software Description](SOFTWARE_INSTRUCTIONS.md)
+   - [Kinematic Control](SOFTWARE_INSTRUCTIONS.md#kinematic-control)
+   - [Manual Teleoperation](SOFTWARE_INSTRUCTIONS.md#manual-teleoperation)
+   - [Localization and mapping](SOFTWARE_INSTRUCTIONS.md#localization-and-mapping)
+   - [Navigation](SOFTWARE_INSTRUCTIONS.md#navigation)
+   - [Pedestrian detection and tracking](SOFTWARE_INSTRUCTIONS.md#pedestrian-detection-and-tracking)
+   - [Simulation](SOFTWARE_INSTRUCTIONS.md#simulation)
 
 IV. [Software setup](#software-setup)
 
@@ -45,97 +44,23 @@ VIII. [Operator instructions](#operator-instructions)
 
 ## I. <a name="general-info"></a> General Info
 
+This project is an open source hardware and software platform based upon its predecessor OpenPodcar [cite OpenPodcar here]. 
+
+* OpenPodcar2 extends OpenPodcar’s design for robust long-term operation. It replaces OpenPodcar’s entire electronics system with new electronics based on the open source hardware R4 [27]. R4 (Rapid Reproducible Robotics Research) is a general purpose medium-sized robotics (i.e. robots capable of transporting a human or similar load) control board, developed to high robustness.
+* OpenPodcar2 also replaces OpenPodcar’s entire ROS self-driving software stack with a new ROS2 stack, which are interfaced to R4 electronics and which are robust at the software level for long-term driving – ROS2 being targeted at robust industrial robotics.
+* OpenPodcar2 replaces all physical connectors used in OpenPodcar with new robust connectors able to withstand tilts and vibrations of the vehicle.
+
 ### ROS2 Humble & Gazebo Fortress
-This project is the complete new port from ROS1 of OpenPodCar1 to ROS2. The full software features the ROS2 Humble version and for simulation is done with new Gazebo.
+This project is the complete new port from ROS1 of OpenPodcar to ROS2. The full software features the ROS2 Humble version and for simulation is done with new Gazebo.
 The OpenPodcar_2 package consists of sub-packages namely; `pod2_description`, `pod2_bringup`, `pod2_navigation`, `pod2_sensor_tools`, `pod2_rtabmap`, `pod2_msgs`.
 
 ## II. <a name="hardware-description"></a> Hardware Description
 
-Complete hardware instructions, including the Bill of Materials and Calibration, can be found in the [HARDWARE_INSTRUCTIONS.md](HARDWARE_INSTRUCTIONS.md) file.
-
-### <a name="bill-of-materials"></a> Bill of Materials
-See [HARDWARE_INSTRUCTIONS.md#i-bill-of-materials](HARDWARE_INSTRUCTIONS.md#i-bill-of-materials) for the full parts list.
-
-### <a name="calibration"></a> Calibration
-See [HARDWARE_INSTRUCTIONS.md#ii-calibration](HARDWARE_INSTRUCTIONS.md#ii-calibration) for depthcam and steering calibration procedures.
-
-
-### <a name="physical-r4-interface"></a> Physical R4 interface
-See [HARDWARE_INSTRUCTIONS.md#iii-physical-r4-interface](HARDWARE_INSTRUCTIONS.md#iii-physical-r4-interface) for the R4 hardware board interface details.
+Complete hardware instructions, including the Physical R4 Interface, Sensors, Bill of Materials and Calibration, can be found in the [HARDWARE_INSTRUCTIONS.md](HARDWARE_INSTRUCTIONS.md) file.
 
 ## III. <a name="software-description"></a> Software description
 
-OpenPodcar2 uses a new software stack based on Robot Operating System version 2 (ROS2).  ROS2 is firstly a middleware system implementing publish-subscribe message passing between nodes across a TCP/IP network. Messages are published on named topics which can be subscribed to by any nodes interested in them. ROS2 is secondly a software ecosystem of state-of-the-art implementations of drivers for robots and simulators and of standard robotics algorithms. 
-
-### Kinematic Control
-
-OpenPodcar2 is as an Ackermann-steered vehicle.   The ROS2 community uses `Twist` as the standard for sending mobile robot motion commands (ROS REP-119), so OpenPodcar2 takes `cmd_vel:Twist` commands as inputs.    ROS2 also provides an Ackermann drive message `ackermann_msgs/msg/AckermannDrive` which contains fields for speed and steering angle.
-
-<p align="center">
-  <img src="./Images and videos/Ackermann Steering.png" width="100%" />
-</p>
-
-### Manaul Teleoperation
-
-* An Xbox controller is used as the manual controller.  `joy` is a standard ROS2 package which consists of node to interface this controller (or many others) to send messages of type `joy` on the topic `/joy`.
-
-* `telelop_twist_joy` is a standard ROS2 node which converts `joy` messages to `Twist` type `cmd_vel` messages.  It includes an additional DMH configured on a button on the controller used via standard ROS2 YAML parameter file (RL for XBox). This DMH button must be held down on the controller in order for any other controls to have an effect.
-
-### Sensors
-
-OpenPodcar2 uses a single depthcam mounted on the front of the vehicle. This  outputs RGB and depth image data as standard ROS2 `Image` messages, along with pointcloud data over `PointCloud2` messages. `PointCloud2` messages are produced directly by the RGBD camera, as for lidar sensors.
-
-<p align="center">
-  <img src="./Images and videos/d435.png" width="100%" />
-</p>
-
-
-### Localization and mapping
-
-* The ROS2 ecosystem provides several alternative tools for SLAM.   We use RTAB-Map, a 3D voxel based SLAM which is specialised for use with RGBD cameras. The RTAB-Map package also provides the visual odometry named as RGBD odometry which is deployed in the vehicle to provide the pose information and `odom` to `base_link` transform. This has shown reliable results for indoor operations.
-
-
-* RTAB-Map SLAM package is used to perform the the mapping and localization which takes the `odom` to `base_link` transform as input and corrects the pose information of OpenPodcar2 in the map frame. 
-
-
-* The Intel Realsense D435 mounted on the vehicle has range of 10m but offers good accuracy for 5m range. The system checked with both ranges and default is set to 5m.
-
-
-<p align="center">
-  <img src="./Images and videos/Large_indoor_map.png" width="100%" />
-</p>
-
-
-### Navigation
-
-The ROS2 ecosystem includes a navigation stack,  Navigation2 (nav2), designed to facilitate the smooth navigation of a vehicle from one point to another (from point A to B) while avoiding obstacles along the path.  OpenPodcar2 utilizes A* hybrid as global path planner, DWB controller server, specific behaviour servers (wait, back).
-
-
-<p align="center">
-  <img src="./Images and videos/Podcar_Nav2_node_graph.png" width="100%" />
-</p>
-
-
-### Pedestrian detection and tracking
-
-* The RGBD camera is used for pedestrian detection and tracking as well as for SLAM.   An off-the-shelf ROS2-wrapped YOLOv8 (https://github.com/Rak-r/yolov8_ros2_OpenPodCarV2.git) is linked to the camera to perform and report pedestrian and vehicle detection and tracking in 3D space. 
-
-
-* YOLOv8 2D detection reports bounding box co-ordinates as ($x$ center, $y$ center, width of the box, height of the box); class name, class ID, confidence score are also extracted. YOLOv8 includes 2D tracking on these detection with BotSORT and ByteTrack which provides acceptable real-time performance but suffers from false re-id errors.  ByteTrack is used as default here. 
-
-* An Intel depth camera ROS2 wrapper is provided by the Intel Realsense SDK (https://www.intelrealsense.com/sdk-2/) which publishes the data over `/camera_image_raw` for RGB image, `/depth` for the depth image, and `/depth_camera_info` reporting the  intrinsic cameras parameters.
-
-
-<p align="center">
-  <img src="./Images and videos/Masked_pedestrian.png" width="100%" />
-</p>
-
-
-
-### Simulation
-
-A ROS2 simulation of OpenPodcar2, is provided, using the newly released Gazebo sim. To handle time/clock synchronization issues at the software level, it is necessary that both the systems; ROS2 stack and Gazebo simulation should work on the same time. Although ROS/ROS2 provides the configurable parameter for the nodes named  \lstinline{use_sim_time} which could be set to a boolean value of either true or false, there are still some issues faced namely; lookup transforms, message filter dropping when setting the the whole NAV2 stack with Gazebo which generates lags in the system and ultimately failures. Nevertheless, Navigation2 must be implemented on the real/physical OpenPodcar2, so it makes sense to set the stack with working on wall time/system time. To achieve this condition, the gazebo plugins used in our stack Ackermann Steering plugin which deals the kinematic control for the robot, lidar sensor system plugin to receive the LaserScan data in case of using lidar, rgbd sensor system plugin for simulating the depth image and  odometry publisher plugin to get the ground-truth odometry data out from Gazebo needs to publish the data on wall time and such condition in Gazebo (making use wall time) is not a very discussed topic and in the recently introduced the new Gazebo 7 makes it more of a highly debugging task. To handle this condition, custom ROS2 nodes are created which subscribes to the gazebo output topics and publishes the topic data on wall/system time.
-
+Complete software instructions can be found in the [SOFTWARE_INSTRUCTIONS.md](SOFTWARE_INSTRUCTIONS.md) file.
 
 ### Packages
 
