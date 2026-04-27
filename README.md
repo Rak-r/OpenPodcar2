@@ -44,7 +44,7 @@ IX. [Operator instructions](#operator-instructions)
 
 
 
-## For hardware setup, bill of materials, and calibration details jump to the [Hardware Description](HARDWARE_INSTRUCTIONS.md). For running or testing the stack in simulation or real physical vehicles, refer to [Software Description](SOFTWARE_INSTRUCTIONS.md), [Software setup](#software-setup) followed by [Operator instructions](#operator-instructions).
+## For hardware setup, bill of materials, and calibration details user is referred  to the [Hardware Description](HARDWARE_INSTRUCTIONS.md). For software description, details user is referred to the [Software Description](SOFTWARE_INSTRUCTIONS.md). For running or testing the stack in simulation or real physical vehicles, user is referred to [Software setup](#software-setup) followed by [Operator instructions](#operator-instructions).
 
 
 ## I. <a name="general-info"></a> General Info
