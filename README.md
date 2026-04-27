@@ -33,14 +33,10 @@ III. [Software Description](SOFTWARE_INSTRUCTIONS.md)
 IV. [General testing](#general-testing)
 
 V. [Software setup](#software-setup)
-
-VI. [Testing installation](#testing-installation)
-
-VII. [Installation for Openpodcar2](#installation-for-openpodcar_v2)
-
-VIII. [Docker support for OpenPodcar2](#docker-support-for-OpenPodcar2)
-
-IX. [Operator instructions](#operator-instructions)
+   - [Testing installation](#testing-installation)
+   - [Installation for OpenPodcar2](#installation-for-openPodcar_v2)
+   - [Docker support for OpenPodcar2](#docker-support-for-OpenPodcar2)
+   - [Operator instructions](#operator-instructions)
 
 
 
@@ -122,7 +118,7 @@ OpenPodcar2 stack uses RMW cycloneDDS, this might be missed by rosdep  command. 
 6. Docker installation: https://docs.docker.com/engine/install/ubuntu/ 
 
 
-## VI. <a name="testing-installation"></a> Testing Installation
+### <a name="testing-installation"></a> Testing Installation
 
 1. To test that ROS2 is installed properly.
 * Open bashrc and add the folowing and save it. `source /opt/ros/humble/setup.bash`.
@@ -148,7 +144,7 @@ OpenPodcar2 stack uses RMW cycloneDDS, this might be missed by rosdep  command. 
 
 
 
-## VII. <a name="installation-for-openpodcar_v2"></a> Installation for OpenPodcar2
+### <a name="installation-for-openpodcar_v2"></a> Installation for OpenPodcar2
 
 To use this package for testing and running simulations using gazebo and ROS2 follow the below instructions:
 
@@ -185,7 +181,7 @@ To use this package for testing and running simulations using gazebo and ROS2 fo
 
 * **For example** : `source /home/<usr_name>/ros2_ws/install/setup.bash`. Replace `<usr_name>` with your user name, get using `pwd` command.
 
-## VIII. <a name="docker-support-for-OpenPodcar2"></a> Docker support for OpenPodcar2
+### <a name="docker-support-for-OpenPodcar2"></a> Docker support for OpenPodcar2
 
 The docker version is supported for ROS2 humble and gazebo Fortress due to LTS version of gazebo at the time project development. In future more version suppport will be added. Follow the below instructions for using docker version of OpenPodcar2 with simulation.
 
@@ -216,7 +212,7 @@ The docker version is supported for ROS2 humble and gazebo Fortress due to LTS v
 
 `ros2 launch pod2_description pod2_description.launch.py scan_node:=false rgbd_node:=true`
 
-## IX. <a name="operator-instructions"></a> Operator instructions
+### <a name="operator-instructions"></a> Operator instructions
 
 Openpodcar_v2 has been tested in both gazebo simulation and real physical envrionment (indoor/outdoor). Follow the below sections for running the vehicle in simulation and real physical world.
 
