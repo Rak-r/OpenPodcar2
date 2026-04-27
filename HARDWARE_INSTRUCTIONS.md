@@ -15,6 +15,7 @@
 
 <p align="center">
   <img src="./Images and videos/R4onperspex.png" width="100%" />
+  <br><br><i>Figure 2: Physical R4 electrical interface.</i>
 </p>
 
 ## II. Sensors
@@ -23,6 +24,7 @@ OpenPodcar2 uses a single depthcam mounted on the front of the vehicle. This  ou
 
 <p align="center">
   <img src="./Images and videos/d435.png" width="100%" />
+  <br><br><i>Figure 3: Intel RealSense D435 Depth Camera.</i>
 </p>
 
 ## III. Bill of Materials
@@ -63,6 +65,7 @@ OpenPodcar2 uses a single depthcam mounted on the front of the vehicle. This  ou
 
 <p align="center">
   <img src="./Images and videos/Depthcam_calib.jpg" width="100%" />
+  <br><br><i>Figure 4: Depthcam calibration setup.</i>
 </p>
 
 
@@ -83,4 +86,5 @@ OpenPodcar2 uses a single depthcam mounted on the front of the vehicle. This  ou
 
 <p align="center">
   <img src="./Images and videos/Steering_readings.png" width="100%" />
+  <br><br><i>Figure 5: Steering mechanism calibration readings.</i>
 </p>
