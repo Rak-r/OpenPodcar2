@@ -143,10 +143,6 @@ The `pod2_description` package contains the mesh files for loading the robot in 
 The `pod2_bringup` package consist of all the control nodes for simulation which utilizes the ROS2 `teleop_twist_joy` package to control the the robot using a game pad. The system is tested with a branded XBox game pad and a compatible generic USB gamepad. The gamepads must be calibrated properly.
 
 
-<p align="center">
-    <img src="./Images and videos/Steering_readings.png" width="100%" />
-    <br><br><i>Figure: Simulated world with map in `rviz` along with `PointCloud2` for camera sensor</i>
-</p>
 
 
 
