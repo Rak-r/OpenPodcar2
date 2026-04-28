@@ -38,6 +38,10 @@ V. [Software setup](#software-setup)
    - [Docker support for OpenPodcar2](#docker-support-for-OpenPodcar2)
    - [Operator instructions](#operator-instructions)
 
+VI. [User Guide](#user-guide)
+   - [Simulation guide](#simulation-guide)
+   - [Physical vehicle Tele-operation & Autonomous operation](#physical-vehicle-tele-operation--autonomous-operation)
+
 
 
 ## For hardware setup, bill of materials, and calibration details user is referred  to the [Hardware Description](HARDWARE_INSTRUCTIONS.md). For software description, details user is referred to the [Software Description](SOFTWARE_INSTRUCTIONS.md). For running or testing the stack in simulation or real physical vehicles, user is referred to [Software setup](#software-setup) followed by [Operator instructions](#operator-instructions).
@@ -216,7 +220,9 @@ The docker version is supported for ROS2 humble and gazebo Fortress due to LTS v
 
 Openpodcar_v2 has been tested in both gazebo simulation and real physical envrionment (indoor/outdoor). Follow the below sections for running the vehicle in simulation and real physical world.
 
-## Simulation guide
+## VI. <a name="user-guide"></a> User Guide
+
+### Simulation guide
 
 Gazebo Fortress is used for the simulation of OpenPodcar2. The new gazebo features more functionalities with enhanced inetrface. As our robot behaves as car-like robot and features Ackermann-Steering kinematics. To maintain this behaviour in simulation the new gazebo now has an Ackermann system plugin which could be used according the robot configuartions. The plugin outputs standard `Twist` messages of field `linear.x` and `angular.z`. This also outputs the odometry information which might not be the correct odometry for the whole robot instead it is the odometry information for steering.
 
@@ -255,7 +261,7 @@ After mapping, if want to start the NAV2 stack in pre-build map, rtabmap can be 
 
 
 
-## Physical vehicle Tele-operation & Autonomous operation
+### Physical vehicle Tele-operation & Autonomous operation
 
 To launch the physical OpenPodcar2 with teleoperation mode, the higher-level incoming game-pad commands as Twist message `linear.x, angualr.z` are converted to R4 protocol message which controls the main driver motor for forward and backward movement and linear actuator for controlling the steering for the OpenPodcar2. 
 
