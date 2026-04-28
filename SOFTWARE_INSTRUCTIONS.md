@@ -39,19 +39,13 @@ The ROS2 ecosystem provides several alternative tools for SLAM.  OpenPodcar2 is 
 Therefore to comply with the sensor setup and input data, we use Real-Time Appearance based Mapping (RTAB-Map) [labbe2019rtab], a graph based SLAM framework that supports RGB-D cameras by leveraging both visual appearance and depth information for 3D mapping and loop-closure detection. RTAB-Map was selected over LiDAR oriented alternatives such as 2D SlamToolbox [macenski2021slam], Hector Slam [kohlbrecher2011flexible], Cartographer [hess2016real]. Also nav2 (which is primarily a planning framework) includes an AMCL localizer-only (no mapping) similar to ROS1's AMCL.
 
 
-<p align="center">
-  <img src="images/INB_Fablab_tight_space.png" width="100%" />
-  <br><br><i>Figure: RTAB 3D Indoor Map in a tight lab space</i>
-</p>
+
 
 The RTAB-Map package also provides the visual odometry named as RGBD odometry which is deployed in the vehicle to provide the pose information and `odom` to `base_link` transform. This has shown reliable results for indoor operations. Moreover, the RTAB-Map SLAM package is used to perform the the mapping and localization which takes the `odom` to `base_link` transform as input and corrects the pose information of OpenPodcar2 in the map frame. 
 To ensure that the 2D occupancy grid map space is marked as free space from the RGBD camera mounted in-front of the vehicle, there is need to tweak the Grid/RangeMax, Grid/RangeMin and Grid/RayTracing according to the range of the RGBD camera. The Intel Realsense D435 mounted on the vehicle has range of 10m but offers good accuracy for 5m range. The system checked with both ranges and default is set to 5m.
 The outputs are the `map` to `base_link` transform, and the corrected pose information of the robot over the topic `/localization_pose` which can be used for further applications. 
 
-<p align="center">
-  <img src="images/rosgraph_rtab.png" width="100%" />
-  <br><br><i>Figure: ROS2 RTAB nodes and messages</i>
-</p>
+
 
 The pose only gets updated when the robot explores the environment, however to achieve continuous pose updates we can enable the RTAB-Map SLAM `map_always_update` parameter. Figure shows the 3D map of indoor lab space using RTAB-Map while Figure highlights the topics subcribed by RTAB-Map node via ros2 node graph
 
@@ -91,13 +85,13 @@ YOLOv8 2D detection reports bounding box co-ordinates as ($x$ center, $y$ center
 An Intel depth camera ROS2 wrapper is provided by the Intel Realsense SDK (https://www.intelrealsense.com/sdk-2/) which publishes the data over `camera_image_raw` for RGB image, `depth` for the depth image, and `depth_camera_info` reporting the  intrinsic cameras parameters.
 
 <p align="center">
-  <img src="images/yolostack.png" width="100%" /> 
+  <img src="./Images and videos/yolostack.png" width="100%" /> 
   <br><br><i>Figure: ROS2 nodes for pedestrian detection and tracking</i>
 </p>
 
 <p align="center">
-  <img src="images/peddet_sim.png" width="45%" />
-  <img src="images/Pedetsrian_crossing.png" width="45%" />
+  <img src="./Images and videos/Pedtracks.png" width="45%" />
+  <img src="./Images and videos/Pedetsrian_crossing.png" width="45%" />
   <br><br><i>Figure: Pedestrian detection results in simulation (left) and real-world deployment on the physical OpenPodcar2 platform (right).</i>
 </p>
 
@@ -123,12 +117,12 @@ A ROS2 simulation of OpenPodcar2, is provided, using the open source igntion Gaz
 
 
 <p align="center">
-    <img src="images/ROS2_GZ_node_graph.png" width="100%" />
+    <img src="./Images and videos/ROS2_GZ_node_graph.png" width="100%" />
     <br><br><i>Figure: ROS2 GZ Bridge node graph with custom nodes setup.</i>
 </p>
 
 <p align="center">
-    <img src="images/rosgraph_all.png" width="100%" />
+    <img src="./Images and videos/rosgraph_all.png" width="100%" />
     <br><br><i>Figure: ROS2 NAV2 full stack setup with Gazebo sim.</i>
 </p>
 
@@ -150,7 +144,7 @@ The `pod2_bringup` package consist of all the control nodes for simulation which
 
 
 <p align="center">
-    <img src="images/Point_to_Scan.png" width="100%" />
+    <img src="./Images and videos/Steering_readings.png" width="100%" />
     <br><br><i>Figure: Simulated world with map in `rviz` along with `PointCloud2` for camera sensor</i>
 </p>
 
