@@ -41,6 +41,7 @@ V. [Software setup](#software-setup)
 VI. [User Guide](#user-guide)
    - [Simulation guide](#simulation-guide)
    - [Physical vehicle Tele-operation & Autonomous operation](#physical-vehicle-tele-operation--autonomous-operation)
+   - [Pedestrian detection and tracking stack](#pedestrian-detection-and-tracking-stack)
 
 
 
@@ -280,6 +281,24 @@ To start the physical vehicle for tele-operation, after building the OpenPodCar2
 5. Launch NAV2 stack: `ros2 launch pod2_navigation OpenPodCar_NAV2.launch.py slam:=false amcl:=false`
 
 After mapping, if want to start the NAV2 stack in pre-build map, rtabmap can be started in localization mode. In order to autonomous drive while mapping the above  could be just followed.
+
+### Pedestrian detection and tracking stack
+
+#### Object Detection in Gazebo Sim
+
+This is the standard behavior of YOLOv8, which includes object tracking.
+
+```shell
+$ ros2 launch yolov8_bringup yolov8.launch.py
+```
+
+#### 3D Object Detection in real time
+
+The 3D bounding boxes are calculated filtering the depth image data from an RGB-D camera using the 2D bounding box. Only objects with a 3D bounding box are visualized in the 2D image.
+
+```shell
+$ ros2 launch yolov8_bringup yolov8_3d.launch.py
+```
 
 
 ## Images and Videos
