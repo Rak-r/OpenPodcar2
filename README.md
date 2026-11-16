@@ -21,6 +21,7 @@ II. [Hardware Description](HARDWARE_INSTRUCTIONS.md)
    - [Sensors](HARDWARE_INSTRUCTIONS.md#ii-sensors)
    - [Bill of Materials](HARDWARE_INSTRUCTIONS.md#iii-bill-of-materials)
    - [Calibration](HARDWARE_INSTRUCTIONS.md#iv-calibration)
+   - [CAD files](#cad-files)
 
 III. [Software Description](SOFTWARE_INSTRUCTIONS.md)
    - [Kinematic Control](SOFTWARE_INSTRUCTIONS.md#kinematic-control)
@@ -61,6 +62,12 @@ This project is an open source hardware and software platform based upon its pre
 ## II. <a name="hardware-description"></a> Hardware Description
 
 Complete hardware instructions, including the Physical R4 Interface, Sensors, Bill of Materials and Calibration, can be found in the [HARDWARE_INSTRUCTIONS.md](HARDWARE_INSTRUCTIONS.md) file.
+
+### <a name="cad-files"></a> CAD files
+FreeCAD design files for the custom mechanical parts are provided in the [CAD](CAD/) folder (made with FreeCAD 1.1; open with FreeCAD 1.1 or newer):
+* `OpenPodcar2.FCStd`: full assembly of the vehicle with the electronics mounting board in place.
+* `mountingboard.FCStd`: the Perspex electronics mounting board, with drilling holes for each component (DC-DC converters, relays, circuit breaker, etc.).
+* `brackets.FCStd`: the two aluminium brackets (supporter bracket and actuator supporter bracket) listed in the [Bill of Materials](HARDWARE_INSTRUCTIONS.md#iii-bill-of-materials).
 
 ## III. <a name="software-description"></a> Software description
 
